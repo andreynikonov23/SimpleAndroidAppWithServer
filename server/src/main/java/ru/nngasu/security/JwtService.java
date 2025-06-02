@@ -34,8 +34,8 @@ public class JwtService {
                 .subject(user.getUsername())
                 .expiration(accessExpiration)
                 .signWith(jwtAccessSecret)
-                .claim("authority", user.getRole().getAuthority())
-                .claim("fullName", String.format("%s %s", user.getFirstname(), user.getLastname()))
+                .claim("name", String.format("%s %s", user.getFirstname(), user.getLastname()))
+                .claim("role", user.getRole())
                 .compact();
     }
 

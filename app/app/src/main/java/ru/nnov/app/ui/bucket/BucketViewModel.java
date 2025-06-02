@@ -1,16 +1,16 @@
-package ru.nnov.auto_parts_store.ui.dashboard;
+package ru.nnov.app.ui.bucket;
 
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-public class DashboardViewModel extends ViewModel {
+public class BucketViewModel extends ViewModel {
 
     private final MutableLiveData<String> mText;
 
-    public DashboardViewModel() {
+    public BucketViewModel() {
         mText = new MutableLiveData<>();
-        mText.setValue("This is dashboard fragment");
+        mText.setValue("This is bucket fragment");
     }
 
     public LiveData<String> getText() {

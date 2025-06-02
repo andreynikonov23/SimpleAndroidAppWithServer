@@ -1,4 +1,4 @@
-package ru.nnov.auto_parts_store.ui.dashboard;
+package ru.nnov.app.ui.bucket;
 
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -10,22 +10,22 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.ViewModelProvider;
 
-import ru.nnov.auto_parts_store.databinding.FragmentDashboardBinding;
+import ru.nnov.app.databinding.FragmentBucketBinding;
 
-public class DashboardFragment extends Fragment {
+public class BucketFragment extends Fragment {
 
-    private FragmentDashboardBinding binding;
+    private FragmentBucketBinding binding;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        DashboardViewModel dashboardViewModel =
-                new ViewModelProvider(this).get(DashboardViewModel.class);
+        BucketViewModel bucketViewModel =
+                new ViewModelProvider(this).get(BucketViewModel.class);
 
-        binding = FragmentDashboardBinding.inflate(inflater, container, false);
+        binding = FragmentBucketBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
 
-        final TextView textView = binding.textDashboard;
-        dashboardViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
+        final TextView textView = binding.textBucket;
+        bucketViewModel.getText().observe(getViewLifecycleOwner(), textView::setText);
         return root;
     }
 

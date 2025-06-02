@@ -19,5 +19,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "auto-parts-store"
+rootProject.name = "app"
 include ':app'

@@ -4,6 +4,7 @@ import jakarta.security.auth.message.AuthException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import ru.nngasu.dao.DAO;
@@ -11,6 +12,7 @@ import ru.nngasu.models.User;
 import ru.nngasu.security.AuthService;
 import ru.nngasu.security.JwtRequest;
 import ru.nngasu.security.JwtResponse;
+import ru.nngasu.security.JwtService;
 
 import java.util.List;
 import java.util.Optional;
@@ -26,11 +28,22 @@ public class AuthController {
         this.userDAO = userDAOImpl;
     }
 
-    @GetMapping("/login")
+    @PostMapping("/login")
     public ResponseEntity login(@RequestBody JwtRequest jwtRequest) {
-        JwtResponse jwtResponse = null;
+        JwtResponse jwtResponse;
         try {
             jwtResponse = authService.login(jwtRequest);
+        } catch (AuthException e) {
+            return ResponseEntity.status(401).body("Unauthorized access");
+        }
+        return ResponseEntity.ok(jwtResponse);
+    }
+
+    @GetMapping("/token")
+    public ResponseEntity getAccessToken(@RequestBody String refreshToken) {
+        JwtResponse jwtResponse;
+        try {
+            jwtResponse = authService.getAccessToken(refreshToken);
         } catch (AuthException e) {
             return ResponseEntity.status(401).body("Unauthorized access");
         }

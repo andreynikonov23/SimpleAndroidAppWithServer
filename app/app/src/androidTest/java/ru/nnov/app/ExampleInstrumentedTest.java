@@ -1,4 +1,4 @@
-package ru.nnov.auto_parts_store;
+package ru.nnov.app;
 
 import android.content.Context;
 
@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
     public void useAppContext() {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        assertEquals("ru.nnov.auto_parts_store", appContext.getPackageName());
+        assertEquals("ru.nnov.app", appContext.getPackageName());
     }
 }

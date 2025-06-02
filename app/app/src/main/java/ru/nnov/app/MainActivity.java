@@ -1,4 +1,4 @@
-package ru.nnov.auto_parts_store;
+package ru.nnov.app;
 
 import android.os.Bundle;
 
@@ -10,7 +10,8 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import ru.nnov.auto_parts_store.databinding.ActivityMainBinding;
+import ru.nnov.app.databinding.ActivityMainBinding;
+import ru.nnov.app.model.User;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -27,11 +28,23 @@ public class MainActivity extends AppCompatActivity {
         // Passing each menu ID as a set of Ids because each
         // menu should be considered as top level destinations.
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.navigation_home, R.id.navigation_dashboard, R.id.navigation_notifications)
+                R.id.navigation_category, R.id.navigation_bucket, R.id.navigation_profile)
                 .build();
         NavController navController = Navigation.findNavController(this, R.id.nav_host_fragment_activity_main);
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.navView, navController);
-    }
 
+        navView.setOnItemSelectedListener(item -> {
+            int itemId = item.getItemId();
+            if (itemId == R.id.navigation_profile) {
+                User user = User.getAuthorityUser();
+                if (user == null) {
+                    navController.navigate(R.id.navigation_login);
+                    return true;
+                }
+            }
+            navController.navigate(itemId);
+            return true;
+        });
+    }
 }
